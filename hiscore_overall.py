@@ -47,7 +47,7 @@ while len(payload) < 50:
     time.sleep(1)
 payload.sort(key = lambda x: x[1], reverse=True)
 
-response = f"\nIron Dream Hiscores (Top 50 - iron only): {date.today().strftime('%d/%m/%Y')}\n"
+response = f"\nIron Dream Overall Hiscores (Top 50 - iron only): {date.today().strftime('%d/%m/%Y')}\n"
 for i, e in enumerate(payload, start=1):
     name = e[0]
     level = e[1]
@@ -56,7 +56,6 @@ for i, e in enumerate(payload, start=1):
     response += f"{placement:<3} {name:<12} {xp:^12} Total:{level:>5}\n"
 
 response_list = response_split(response)
-print(response_list)
 for response in response_list:
     webhook = DiscordWebhook(url=config.discord_webhook, content=response)
     r = webhook.execute()
