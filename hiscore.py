@@ -31,7 +31,7 @@ response = "\n"
 
 for k in bosses:
     boss = data["metricLeaders"]["bosses"][k]["metric"]
-    name = data["metricLeaders"]["bosses"][k]["player"]["username"]
+    name = data["metricLeaders"]["bosses"][k]["player"]["displayName"]
     kc = data["metricLeaders"]["bosses"][k]["kills"]
     # Any custom formatting goes here
     response += (f"{bosses_map[boss]}: **{name}** | KC: **{kc}**\n")
