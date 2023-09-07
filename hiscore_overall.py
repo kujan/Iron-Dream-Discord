@@ -29,14 +29,15 @@ def response_split(response):
     response_list.append(temp + "```")
     return response_list
 
-
+allowed_account_types = ["ironman", "hardcore", "ultimate"]
 payload = []
 offset = 0
 while len(payload) < 50:
     r = requests.get(f"https://api.wiseoldman.net/v2/groups/{wom_group_id}/hiscores?metric=overall&limit=50&offset={offset}", headers={'Accept': 'application/json'})
     data = r.json()
+    
     for player in data:
-        if player["player"]["type"] == "ironman" and len(payload) < 50:
+        if player["player"]["type"] in allowed_account_types and len(payload) < 50:
             name = player["player"]["displayName"]
             level = player["data"]["level"]
             xp = player["data"]["experience"]
@@ -53,7 +54,7 @@ for i, e in enumerate(payload, start=1):
     level = e[1]
     xp = e[2]
     placement = str(i) + "."
-    response += f"{placement:<3} {name:<12} {xp:^12} Total:{level:>5}\n"
+    response += f"{placement:<3} {name:<12} {xp:^8} Total:{level:>5}\n"
 
 response_list = response_split(response)
 for response in response_list:
